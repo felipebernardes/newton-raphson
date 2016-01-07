@@ -1,0 +1,54 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background: #DE6262; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #DE6262 , #FFB88C); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #DE6262 , #FFB88C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1 {
+  margin-top: 10%;
+  color: #555;
+  text-align: center;
+}
+
+form {
+  padding: 1rem;
+  width: 380px;
+  margin: auto;
+  padding: 1.5rem;
+  background-color: rgba(255,255,255,0.6);
+  color: #555 !important;
+}
+
+tr, td, input {
+  color: #555 !important;
+}
+
+input {
+  margin-left: 1rem;
+  padding: .75rem;
+  border: 0 !important;
+}
+
+table {
+  margin: 0 auto;
+}
+
+tr:not(last-of-type) {
+  margin-bottom: 1.5rem;
+}
+
+button {
+  color: #FFF;
+  font-weight: 800;
+  background-color: #555;
+  letter-spacing: .2rem;
+  padding: .75rem;
+  width: 100%;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  border: 0;
+}
