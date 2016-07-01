@@ -9,9 +9,31 @@
   <body>
 
 <!--
-x - exp(-x), com a derivada 1 + exp(-x) e valor inicial 0.5
-x - cos(x), com a derivada 1 + sin(x) e valor inicial  0.5
-x*x*x + 4*x*x - 10, com a derivada 3*x*x + 8*x e erro inicial 1.5
+//1
+f = x²-5x+6=0 -> x*x-5*x+6
+f' = 2*x-5
+x0 = 2
+x0 = 3
+
+//2
+f = x³-4x²+3x+7=0 -> x*x*x-4*x*x+3*x+7
+f' = 3*x*x-8*x
+x0=2
+
+//3
+f = x - exp(-x)
+f' = 1 + exp(-x)
+x0 = 0.5
+
+//4
+f = x - cos(x)
+f' = 1 + sin(x)
+x0 = 0.5
+
+//5
+f = x³+4x²-10 -> x*x*x+4*x*x-10
+f' = 3*x*x+8*x
+x0 = 1.5
 -->
     <script type="text/javascript">
 
@@ -26,11 +48,11 @@ x*x*x + 4*x*x - 10, com a derivada 3*x*x + 8*x e erro inicial 1.5
     function writeDocHead(window, expressao) {
        with (window.document) {
           writeln("<table border=1>");
-          writeln("<tr>");
-          writeln("<th colspan=2>" + expressao + " = 0");
-          writeln("<tr>");
-          writeln("<th>n");
-          writeln("<th>x");
+            writeln("<tr>");
+              writeln("<th colspan=2>" + expressao + " = 0");
+            writeln("<tr>");
+              writeln("<th>n");
+              writeln("<th>x");
        }
     }
 
@@ -44,32 +66,35 @@ x*x*x + 4*x*x - 10, com a derivada 3*x*x + 8*x e erro inicial 1.5
     function iterate(parametro, expressao, derivada, x0, iter1, iter2) {
        // cria a função g com parametro x e renderiza a página
        var v;
-       var body = "with (Math) " +
-                  "{ v = " + parametro +
-                  " - (" + expressao + ")/(" + derivada + ");" +
-                  "} " +
-                  "return v;";
+       var body = "with (Math) " +"{ v = " + parametro +" - (" + expressao + ")/(" + derivada + ");" +"} " +"return v;";
        var g = new Function(parametro, body);
        var x = parseFloat(x0);
-       var w = window.open("", "result",
-          "resizable,menubar,scrollbars,width=250,height=400",true);
+       var w = window.open("", "resultado","resizable,menubar,scrollbars,width=250,height=400",true);
 
-       // produz solução de x = g(x) onde
-       // g(x) = x - f(x)/f'(x)
+       // produz solução de x = g(x) onde g(x) = x - f(x)/f'(x)
+
+       //escreve cabeçalho na window passando a expressao
        writeDocHead(w, expressao);
-       if (iter1 == 0) writeTableLine(w,0,x);
+
+      //se a iteracao inicial for zero, escreve a linha na janela, com valor 0
+      if (iter1 == 0) writeTableLine(w,0,x);
 
        var i;
+
+       //pra cada iteração
        for (i=1; i <= iter2; i++) {
-          x = g(x);
-          if (i >= iter1) writeTableLine(w,i,x);
+          valorDeX = g(x); //valor de x é definido pela g(x)
+          if (i >= iter1) {
+            writeTableLine(w,i,valorDeX);
+            //se o i for maior ou igual a iteracao inicial, escreve linha passando X
+          }
        }
        writeDocEnd(w);
     }
     </script>
 
     <h1>Método de Newton-Raphson para f(x)=0</h1>
-    <form method="post">
+    <form method="post" name="form">
       <table>
         <tr>
           <td>Função <code>f(x)</code>:</td>
@@ -81,19 +106,19 @@ x*x*x + 4*x*x - 10, com a derivada 3*x*x + 8*x e erro inicial 1.5
         </tr>
         <tr>
           <td>Valor inicial de <code>x</code>:</td>
-          <td><input type="text" name="x0" value=0.2></td>
+          <td><input type="text" name="x0" value="0.2"></td>
         </tr>
         <tr>
           <td>Iteração inicial:</td>
-          <td><input type="text" name="iter1" value=0></td>
+          <td><input type="text" name="iter1" value="0"></td>
         </tr>
         <tr>
           <td>Última iteração:</td>
-          <td><input type="text" name="iter2" value=15></td>
+          <td><input type="text" name="iter2" value="15"></td>
         </tr>
         <tr>
-          <td colspan=2 align=center>
-          <button onClick='iterate("x", form.expr.value, form.deriv.value, form.x0.value, form.iter1.value, form.iter2.value)'>
+          <td colspan="2" align="center">
+          <button onClick="iterate('x', form.expr.value, form.deriv.value, form.x0.value, form.iter1.value, form.iter2.value)">
           Calcular</button>
           </td>
         </tr>
